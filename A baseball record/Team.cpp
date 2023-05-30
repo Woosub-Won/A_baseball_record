@@ -22,6 +22,12 @@ Team::Team(const string n)
 
 void Team::setStartingPlayer()
 {
+	char enter;
+	cout << "Do you want to register starting player? [Y/N] ";
+	cin >> enter;
+	if (enter == 'N')
+		return;
+
 	cout << "Starting Player" << endl;
 	for (int i = 0; i < 10; i++)
 	{
