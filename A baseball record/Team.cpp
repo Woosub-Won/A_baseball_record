@@ -18,10 +18,21 @@ Team::Team(const string n)
 	hitter = nullptr;
 	numOfPitcher = 0;
 	numOfHitter = 0;
+	isRegister = false;
 }
 
 void Team::setStartingPlayer()
 {
+	char enter;
+	cout << "Do you want to register starting player? [Y/N] ";
+	cin >> enter;
+	if (enter == 'N')
+	{
+		isRegister = false;
+		return;
+	}
+	isRegister = true;
+
 	cout << "Starting Player" << endl;
 	for (int i = 0; i < 10; i++)
 	{
@@ -63,6 +74,11 @@ void Team::setStartingPlayer()
 
 void Team::printStartingPlayer()
 {
+	if (!isRegister)
+	{
+		cout << "Not registered Yet!" << endl;
+		return;
+	}
 	cout << endl;
 	cout << "Team " << name << endl;
 	for (int i = 0; i < 9; i++)
