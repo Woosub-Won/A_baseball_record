@@ -17,6 +17,7 @@ public:
 	Player* hitter;
 	int numOfPitcher;
 	int numOfHitter;
+	bool isRegister;
 
 public:
 	void setStartingPlayer();
