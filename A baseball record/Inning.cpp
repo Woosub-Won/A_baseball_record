@@ -22,7 +22,9 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-void Inning::inputHitterData(Team A)
+// A가 공격팀, B가 수비팀
+// A가 타자, B가 투수,수비
+void Inning::inputHitterData(Team A, Team B)
 {
 	
 	int cnt = 0;

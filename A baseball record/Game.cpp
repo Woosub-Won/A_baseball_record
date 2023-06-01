@@ -38,13 +38,13 @@ int main()
 	for (int i = 0; i < 9; i++)
 	{
 		cout << i + 1 << "회" << " 초" << endl;
-		innings[i][0].inputHitterData(A);
+		innings[i][0].inputHitterData(A, B);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
 		
 		printBoard(innings, A.name, B.name, i + 1);
 
 		cout << i + 1 << "회" << " 말" << endl;
-		innings[i][1].inputHitterData(B);
+		innings[i][1].inputHitterData(B, A);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
 
 		printBoard(innings, A.name, B.name, i + 1);
