@@ -24,7 +24,7 @@ Inning::Inning()
 
 // A가 공격팀, B가 수비팀
 // A가 타자, B가 투수
-int Inning::inputHitterData(Team* a, Team* b, int n)
+int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 {
 	int cnt = 0;
 	int idx = n;
