@@ -22,7 +22,7 @@ public:
 public:
 	Inning();
 
-	void inputHitterData(Team A);
+	int inputHitterData(Team* a, Team* b, int n);
 	// 2차원 배열로 ballCount를 저장
 	// 1번 ssbbs
 	// 2번 sbbh

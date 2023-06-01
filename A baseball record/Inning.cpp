@@ -22,7 +22,7 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-void Inning::inputHitterData(Team A)
+int Inning::inputHitterData(Team* a, Team* b, int n)
 {
 	
 	int cnt = 0;
