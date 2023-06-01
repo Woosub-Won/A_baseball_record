@@ -6,6 +6,12 @@ using namespace std;
 
 class Team
 {
+private:
+	int H;
+	int B;
+	int E;
+	int R;
+
 public:
 	Team(const string n);
 
@@ -28,5 +34,6 @@ public:
 	void printHitter();
 	void printAllPlayer();
 	void swapPlayer(Player* A, Player* B);
+	void reflectBoard(int h, int b, int e, int r);
 };
 

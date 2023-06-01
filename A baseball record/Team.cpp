@@ -6,6 +6,11 @@ using namespace std;
 
 Team::Team(const string n)
 {
+	H = 0;
+	B = 0;
+	E = 0;
+	R = 0;
+
 	name = n;
 	for (int i = 0; i < 10; i++)
 	{
@@ -208,4 +213,12 @@ void Team::swapPlayer(Player* A, Player* B)		// A¶û B¶û ½º¿Ò
 	B->setNumber(tmp.getNumber());
 	B->setPosition(tmp.getPosition(true));
 	B->setStatus(tmp.getStatus(true));
+}
+
+void Team::reflectBoard(int h, int b, int e, int r)
+{
+	H += h;
+	B += b;
+	E += e;
+	R += r;
 }

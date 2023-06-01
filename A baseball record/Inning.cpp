@@ -1,4 +1,5 @@
 #include "Inning.h"
+#include "Team.h"
 #include <iostream>
 #include <string>
 
@@ -21,7 +22,7 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-void Inning::inputHitterData()
+void Inning::inputHitterData(Team A)
 {
 	
 	int cnt = 0;

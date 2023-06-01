@@ -6,7 +6,7 @@ using namespace std;
 
 class Inning
 {
-private:
+public:
 	int H;
 	int B;
 	int E;
@@ -22,7 +22,7 @@ public:
 public:
 	Inning();
 
-	void inputHitterData();
+	void inputHitterData(Team A);
 	// 2차원 배열로 ballCount를 저장
 	// 1번 ssbbs
 	// 2번 sbbh
