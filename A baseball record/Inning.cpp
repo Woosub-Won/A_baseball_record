@@ -23,8 +23,8 @@ Inning::Inning()
 }
 
 // A가 공격팀, B가 수비팀
-// A가 타자, B가 투수,수비
-int Inning::inputHitterData(Team a, Team b, int n)
+// A가 타자, B가 투수
+int Inning::inputHitterData(Team* a, Team* b, int n)
 {
 	int cnt = 0;
 	int idx = n;
@@ -33,8 +33,47 @@ int Inning::inputHitterData(Team a, Team b, int n)
 		if (idx > 8)
 			idx = 0;
 		int strike = 0, ball = 0;
-		cout << "Hitter Name : " << a.startingPlayer[idx].getName() << endl;
-		hitter.push_back(a.startingPlayer[idx++].getName());
+		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+
+		char option;
+		cout << "Do you want to change player? [Y/N] ";
+		cin >> option;
+
+		if (option == 'Y')
+		{
+			cout << "Which team? " << a->name << " or " << b->name << "? ";
+			string teamName;
+			cin >> teamName;
+			if (teamName.compare(a->name) == 0)
+			{
+				a->printHitter();
+				cout << "Which player? ";
+				string playerName;
+				cin >> playerName;
+
+				Player newPlayer;
+				for (int i = 0; i < a->numOfHitter; i++)
+				{
+					if (a->startingPlayer[idx].getName().compare(a->hitter[i].getName()) == 0)
+						a->hitter[i].setStatus(-1);
+
+					if (playerName.compare(a->hitter[i].getName()) == 0)
+					{
+						newPlayer.setName(a->hitter[i].getName());
+						newPlayer.setNumber(a->hitter[i].getNumber());
+						newPlayer.setPosition(a->hitter[i].getPosition(true));
+						newPlayer.setStatus(a->hitter[i].getStatus(true));
+						a->hitter[i].setStatus(1);
+					}
+				}
+				a->startingPlayer[idx].setName(newPlayer.getName());
+				a->startingPlayer[idx].setNumber(newPlayer.getNumber());
+				a->startingPlayer[idx].setPosition(newPlayer.getPosition(true));
+				a->startingPlayer[idx].setStatus(newPlayer.getStatus(true));
+			}
+		}
+		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+		hitter.push_back(a->startingPlayer[idx++].getName());
 		ballCount.push_back(vector<char>());
 		while (strike < 3 && ball < 4)
 		{
