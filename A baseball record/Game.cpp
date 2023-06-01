@@ -35,16 +35,18 @@ int main()
 	B.printAllPlayer();
 
 	Inning innings[9][2];
+	int idxA = 0;
+	int idxB = 0;
 	for (int i = 0; i < 9; i++)
 	{
 		cout << i + 1 << "회" << " 초" << endl;
-		innings[i][0].inputHitterData(A);
+		idxA = innings[i][0].inputHitterData(&A, &B, idxA);	// 주소 연산자를 활용하여 전반적인 멤버 교체
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
-		
+
 		printBoard(innings, A.name, B.name, i + 1);
 
 		cout << i + 1 << "회" << " 말" << endl;
-		innings[i][1].inputHitterData(B);
+		idxB = innings[i][1].inputHitterData(&B, &A, idxB);	// 주소 연산자를 활용하여 전반적인 멤버 교체
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
 
 		printBoard(innings, A.name, B.name, i + 1);

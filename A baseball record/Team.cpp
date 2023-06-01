@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include "Team.h"
 #include "Player.h"
 
@@ -180,7 +180,7 @@ void Team::printPitcher()
 void Team::printHitter()
 {
 	cout << "Hitter" << endl;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < numOfHitter; i++)
 	{
 		cout << "No." << hitter[i].getNumber() << "\t" << hitter[i].getName()
 			<< "\tposition : " << hitter[i].getPosition() << "\tstatus : " << hitter[i].getStatus() << endl;
@@ -196,7 +196,7 @@ void Team::printAllPlayer()
 	printPitcher();
 }
 
-void Team::swapPlayer(Player* A, Player* B)		// A¶û B¶û ½º¿Ò
+void Team::swapPlayer(Player* A, Player* B)		// AÂ¶Ã» BÂ¶Ã» Â½ÂºÂ¿Ã’
 {
 	Player tmp;
 	tmp.setName(A->getName());

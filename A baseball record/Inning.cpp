@@ -22,17 +22,58 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-void Inning::inputHitterData(Team A)
+// A가 공격팀, B가 수비팀
+// A가 타자, B가 투수
+int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 {
-	
 	int cnt = 0;
+	int idx = n;
 	while (O < 3)
 	{
+		if (idx > 8)
+			idx = 0;
 		int strike = 0, ball = 0;
-		cout << "Hitter Name : ";
-		string name;
-		cin >> name;
-		hitter.push_back(name);
+		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+
+		char option;
+		cout << "Do you want to change player? [Y/N] ";
+		cin >> option;
+
+		if (option == 'Y')
+		{
+			cout << "Which team? " << a->name << " or " << b->name << "? ";
+			string teamName;
+			cin >> teamName;
+			if (teamName.compare(a->name) == 0)
+			{
+				a->printHitter();
+				cout << "Which player? ";
+				string playerName;
+				cin >> playerName;
+
+				Player newPlayer;
+				for (int i = 0; i < a->numOfHitter; i++)
+				{
+					if (a->startingPlayer[idx].getName().compare(a->hitter[i].getName()) == 0)
+						a->hitter[i].setStatus(-1);
+
+					if (playerName.compare(a->hitter[i].getName()) == 0)
+					{
+						newPlayer.setName(a->hitter[i].getName());
+						newPlayer.setNumber(a->hitter[i].getNumber());
+						newPlayer.setPosition(a->hitter[i].getPosition(true));
+						newPlayer.setStatus(a->hitter[i].getStatus(true));
+						a->hitter[i].setStatus(1);
+					}
+				}
+				a->startingPlayer[idx].setName(newPlayer.getName());
+				a->startingPlayer[idx].setNumber(newPlayer.getNumber());
+				a->startingPlayer[idx].setPosition(newPlayer.getPosition(true));
+				a->startingPlayer[idx].setStatus(newPlayer.getStatus(true));
+			}
+		}
+		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+		hitter.push_back(a->startingPlayer[idx++].getName());
 		ballCount.push_back(vector<char>());
 		while (strike < 3 && ball < 4)
 		{
@@ -44,7 +85,7 @@ void Inning::inputHitterData(Team A)
 			{
 			case 'S': strike++; break;
 			case 'B': ball++;	break;
-			case 'F': 
+			case 'F':
 				if (strike < 2)
 					strike++;
 				break;
@@ -53,7 +94,7 @@ void Inning::inputHitterData(Team A)
 				break;
 			}
 		}
-		
+
 		if (ball == 4)
 		{
 			hitterResult.push_back("BB");
@@ -285,4 +326,5 @@ void Inning::inputHitterData(Team A)
 		}
 		cnt++;
 	}
+	return idx;
 }

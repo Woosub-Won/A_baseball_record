@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Team.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -22,7 +23,7 @@ public:
 public:
 	Inning();
 
-	void inputHitterData(Team A);
+	int inputHitterData(Team* a, Team* b, int n);		// 인자로 포인터 사용
 	// 2차원 배열로 ballCount를 저장
 	// 1번 ssbbs
 	// 2번 sbbh
