@@ -180,7 +180,7 @@ void Team::printPitcher()
 void Team::printHitter()
 {
 	cout << "Hitter" << endl;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < numOfHitter; i++)
 	{
 		cout << "No." << hitter[i].getNumber() << "\t" << hitter[i].getName()
 			<< "\tposition : " << hitter[i].getPosition() << "\tstatus : " << hitter[i].getStatus() << endl;
