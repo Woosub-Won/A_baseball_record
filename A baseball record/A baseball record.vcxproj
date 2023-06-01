@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Inning.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Team.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Inning.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Team.cpp" />
   </ItemGroup>
