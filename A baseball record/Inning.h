@@ -23,7 +23,11 @@ public:
 public:
 	Inning();
 
+<<<<<<< HEAD
 	int inputHitterData(Team* a, Team* b, int n);		// 인자로 포인터 사용
+=======
+	int inputHitterData(Team* a, Team* b, int n);
+>>>>>>> 7d9cb8fdec15386c0cc232801107c6a3e43ec1e1
 	// 2차원 배열로 ballCount를 저장
 	// 1번 ssbbs
 	// 2번 sbbh

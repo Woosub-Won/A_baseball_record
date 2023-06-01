@@ -22,9 +22,13 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
+<<<<<<< HEAD
 // A가 공격팀, B가 수비팀
 // A가 타자, B가 투수
 int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
+=======
+int Inning::inputHitterData(Team* a, Team* b, int n)
+>>>>>>> 7d9cb8fdec15386c0cc232801107c6a3e43ec1e1
 {
 	int cnt = 0;
 	int idx = n;
