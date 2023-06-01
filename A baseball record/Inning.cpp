@@ -24,17 +24,17 @@ Inning::Inning()
 
 // A가 공격팀, B가 수비팀
 // A가 타자, B가 투수,수비
-void Inning::inputHitterData(Team A, Team B)
+int Inning::inputHitterData(Team a, Team b, int n)
 {
-	
 	int cnt = 0;
+	int idx = n;
 	while (O < 3)
 	{
+		if (idx > 8)
+			idx = 0;
 		int strike = 0, ball = 0;
-		cout << "Hitter Name : ";
-		string name;
-		cin >> name;
-		hitter.push_back(name);
+		cout << "Hitter Name : " << a.startingPlayer[idx].getName() << endl;
+		hitter.push_back(a.startingPlayer[idx++].getName());
 		ballCount.push_back(vector<char>());
 		while (strike < 3 && ball < 4)
 		{
@@ -287,4 +287,5 @@ void Inning::inputHitterData(Team A, Team B)
 		}
 		cnt++;
 	}
+	return idx;
 }
