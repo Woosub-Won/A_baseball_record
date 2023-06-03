@@ -22,19 +22,10 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 // A가 공격팀, B가 수비팀
 // A가 타자, B가 투수
 int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
-=======
-int Inning::inputHitterData(Team* a, Team* b, int n)
->>>>>>> 7d9cb8fdec15386c0cc232801107c6a3e43ec1e1
-=======
-// A가 공격팀, B가 수비팀
-// A가 타자, B가 투수
-int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
->>>>>>> feature2
 {
 	int cnt = 0;
 	int idx = n;
@@ -80,9 +71,38 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 				a->startingPlayer[idx].setNumber(newPlayer.getNumber());
 				a->startingPlayer[idx].setPosition(newPlayer.getPosition(true));
 				a->startingPlayer[idx].setStatus(newPlayer.getStatus(true));
+				cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+			}
+			else if (teamName.compare(b->name) == 0)
+			{
+				b->printPitcher();
+				cout << "Which player? ";
+				string playerName;
+				cin >> playerName;
+
+				Player newPlayer;
+				for (int i = 0; i < b->numOfPitcher; i++)
+				{
+					if (b->startingPlayer[9].getName().compare(b->pitcher[i].getName()) == 0)
+						b->pitcher[i].setStatus(-1);
+
+					if (playerName.compare(b->pitcher[i].getName()) == 0)
+					{
+						newPlayer.setName(b->pitcher[i].getName());
+						newPlayer.setNumber(b->pitcher[i].getNumber());
+						newPlayer.setPosition(b->pitcher[i].getPosition(true));
+						newPlayer.setStatus(b->pitcher[i].getStatus(true));
+						b->pitcher[i].setStatus(1);
+					}
+				}
+				b->startingPlayer[9].setName(newPlayer.getName());
+				b->startingPlayer[9].setNumber(newPlayer.getNumber());
+				b->startingPlayer[9].setPosition(newPlayer.getPosition(true));
+				b->startingPlayer[9].setStatus(newPlayer.getStatus(true));
+				cout << "Pitcher Name : " << b->startingPlayer[9].getName() << endl;
 			}
 		}
-		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+		
 		hitter.push_back(a->startingPlayer[idx++].getName());
 		ballCount.push_back(vector<char>());
 		while (strike < 3 && ball < 4)
