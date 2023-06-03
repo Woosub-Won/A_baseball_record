@@ -6,7 +6,7 @@ using namespace std;
 
 class Team
 {
-private:
+public:
 	int H;
 	int B;
 	int E;
