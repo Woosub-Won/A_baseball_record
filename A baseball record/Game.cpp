@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void printBoard(Inning innings[][2], string a, string b, int cnt);
+void printBoard(Inning innings[][2], string a, string b, int cnt, bool top);
 
 int main()
 {
@@ -43,35 +43,79 @@ int main()
 		idxA = innings[i][0].inputHitterData(&A, &B, idxA);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
 		
-		printBoard(innings, A.name, B.name, i + 1);
+		printBoard(innings, A.name, B.name, i + 1, true);
 
 		cout << i + 1 << "È¸" << " ¸»" << endl;
 		idxB = innings[i][1].inputHitterData(&B, &A, idxB);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
 
-		printBoard(innings, A.name, B.name, i + 1);
+		printBoard(innings, A.name, B.name, i + 1, false);
 	}
 }
 
-void printBoard(Inning innings[][2], string a, string b, int cnt)
+void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 {
+	int A_R = 0, B_R = 0;
+	int A_H = 0, B_H = 0;
+	int A_E = 0, B_E = 0;
+	int A_B = 0, B_B = 0;
+
+
 	cout << "-------------------------------------------------------------" << endl;
 	cout << "l TEAM ";
 	for (int i = 0; i < 9; i++)
 	{
 		cout << "l " << i + 1 << " ";
 	}
+	cout << "l R ";
+	cout << "l H ";
+	cout << "l E ";
+	cout << "l B ";
+
 	cout << endl << "-------------------------------------------------------------" << endl;
 	cout << "l " << a << " l";
-	for (int i = 0; i < cnt; i++)
+	for (int i = 0; i < 9; i++)
 	{
-		cout << " " << innings[i][0].R << " l";
+		if (i < cnt)
+		{
+			cout << " " << innings[i][0].R << " l";
+			A_R += innings[i][0].R;
+			A_H += innings[i][0].H;
+			A_E += innings[i][0].E;
+			A_B += innings[i][0].B;
+		}
+		else
+			cout << "   l";
 	}
+	
+	
+	cout << " " << A_R << " ";
+	cout << "l " << A_H << " ";
+	cout << "l " << A_E << " ";
+	cout << "l " << A_B << " ";
+
 	cout << endl << "-------------------------------------------------------------" << endl;
 	cout << "l " << b << " l";
-	for (int i = 0; i < cnt; i++)
+	int j = cnt;
+	if (top)
+		j--;
+	for (int i = 0; i < 9; i++)
 	{
-		cout << " " << innings[i][1].R << " l";
+		if (i < j)
+		{
+			cout << " " << innings[i][1].R << " l";
+			B_R += innings[i][1].R;
+			B_H += innings[i][1].H;
+			B_E += innings[i][1].E;
+			B_B += innings[i][1].B;
+		}
+		else
+			cout << "   l";
 	}
+	cout << " " << B_R << " ";
+	cout << "l " << B_H << " ";
+	cout << "l " << B_E << " ";
+	cout << "l " << B_B << " ";
+
 	cout << endl << "-------------------------------------------------------------" << endl;
 }
