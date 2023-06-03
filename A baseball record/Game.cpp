@@ -34,10 +34,10 @@ int main()
 	B.printStartingPlayer();
 	B.printAllPlayer();
 
-	Inning innings[9][2];
+	Inning innings[12][2];
 	int idxA = 0;
 	int idxB = 0;
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		cout << i + 1 << "È¸" << " ÃÊ" << endl;
 		idxA = innings[i][0].inputHitterData(&A, &B, idxA);
@@ -63,7 +63,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 
 	cout << "-------------------------------------------------------------" << endl;
 	cout << "l TEAM ";
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		cout << "l " << i + 1 << " ";
 	}
@@ -74,7 +74,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 
 	cout << endl << "-------------------------------------------------------------" << endl;
 	cout << "l " << a << " l";
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		if (i < cnt)
 		{
@@ -86,10 +86,13 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 		}
 		else
 			cout << "   l";
+
+		if (i >= 8)
+			cout << " ";
 	}
 	
 	
-	cout << " " << A_R << " ";
+	cout << A_R << " ";
 	cout << "l " << A_H << " ";
 	cout << "l " << A_E << " ";
 	cout << "l " << A_B << " ";
@@ -99,7 +102,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 	int j = cnt;
 	if (top)
 		j--;
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		if (i < j)
 		{
@@ -111,8 +114,11 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 		}
 		else
 			cout << "   l";
+
+		if (i >= 8)
+			cout << " ";
 	}
-	cout << " " << B_R << " ";
+	cout << B_R << " ";
 	cout << "l " << B_H << " ";
 	cout << "l " << B_E << " ";
 	cout << "l " << B_B << " ";
