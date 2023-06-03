@@ -99,75 +99,42 @@ int Inning::inputHitterData(Team* a, Team* b, int n, int inning, bool top)	// 牢
 				b->startingPlayer[9].setStatus(newPlayer.getStatus(true));
 				cout << "Pitcher Name : " << b->startingPlayer[9].getName() << endl;
 			}
+			else
+			{
+				cout << "Invalid Input" << endl;
+				continue;
+			}
 		}
+		else if (option == 'N')
+		{
+			hitter.push_back(a->startingPlayer[idx++].getName());
+			ballCount.push_back(vector<char>());
+			while (strike < 3 && ball < 4)
+			{
+				cout << "Current ball count : " << strike << "S " << ball << "B " << O << "O" << endl;
+				char situation;
+				cin >> situation;
+				ballCount[cnt].push_back(situation);
+				switch (situation)
+				{
+				case 'S': strike++; break;
+				case 'B': ball++;	break;
+				case 'F':
+					if (strike < 2)
+						strike++;
+					break;
+				case 'H':
+					strike = 3;
+					break;
+				default:
+					cout << "Invalid Input" << endl;
+					continue;
+				}
+			}
 
-		hitter.push_back(a->startingPlayer[idx++].getName());
-		ballCount.push_back(vector<char>());
-		while (strike < 3 && ball < 4)
-		{
-			cout << "Current ball count : " << strike << "S " << ball << "B " << O << "O" << endl;
-			char situation;
-			cin >> situation;
-			ballCount[cnt].push_back(situation);
-			switch (situation)
+			if (ball == 4)
 			{
-			case 'S': strike++; break;
-			case 'B': ball++;	break;
-			case 'F':
-				if (strike < 2)
-					strike++;
-				break;
-			case 'H':
-				strike = 3;
-				break;
-			}
-		}
-
-		if (ball == 4)
-		{
-			hitterResult.push_back("BB");
-			if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
-			{
-				base[0] = 1;
-			}
-			else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
-			{
-				base[0] = 1;
-				base[1] = 1;
-			}
-			else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
-			{
-				base[0] = 1;
-				base[1] = 1;
-				base[2] = 1;
-			}
-			else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
-			{
-				base[0] = 1;
-				base[1] = 1;
-				base[2] = 1;
-			}
-			else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
-			{
-				base[0] = 1;
-				base[1] = 1;
-				base[2] = 1;
-			}
-			else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
-			{
-				base[0] = 1;
-				R++;
-			}
-			B++;
-		}
-		else if (ballCount[cnt][ballCount[cnt].size() - 1] == 'H')
-		{
-			cout << "What is the result? ";
-			string result;
-			cin >> result;
-			hitterResult.push_back(result);
-			if (result.compare("E") == 0)
-			{
+				hitterResult.push_back("BB");
 				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
 				{
 					base[0] = 1;
@@ -187,195 +154,247 @@ int Inning::inputHitterData(Team* a, Team* b, int n, int inning, bool top)	// 牢
 				{
 					base[0] = 1;
 					base[1] = 1;
-					base[2] = 0;
-					R++;
+					base[2] = 1;
 				}
 				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
 				{
 					base[0] = 1;
-					base[1] = 0;
-					R++;
+					base[1] = 1;
+					base[2] = 1;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
 				{
 					base[0] = 1;
 					R++;
 				}
-				E++;
+				B++;
 			}
-			if (result.compare("FB") == 0 || result.compare("GB") == 0)
+			else if (ballCount[cnt][ballCount[cnt].size() - 1] == 'H')
 			{
+				cout << "What is the result? ";
+				string result;
+				cin >> result;
+
+				while (result.compare("E") != 0 && result.compare("FB") != 0 && result.compare("GB") != 0 &&
+					result.compare("H1") != 0 && result.compare("H2") != 0 && result.compare("H3") != 0 && result.compare("HR") != 0)
+				{
+					cout << "Invalid Input" << endl;
+					cout << "What is the result? ";
+					cin >> result;
+				}
+
+				hitterResult.push_back(result);
+				if (result.compare("E") == 0)
+				{
+					if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
+					{
+						base[0] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
+					{
+						base[0] = 1;
+						base[1] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
+					{
+						base[0] = 1;
+						base[1] = 1;
+						base[2] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
+					{
+						base[0] = 1;
+						base[1] = 1;
+						base[2] = 0;
+						R++;
+					}
+					else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
+					{
+						base[0] = 1;
+						base[1] = 0;
+						R++;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
+					{
+						base[0] = 1;
+						R++;
+					}
+					E++;
+				}
+				if (result.compare("FB") == 0 || result.compare("GB") == 0)
+				{
+					O++;
+				}
+				else if (result.compare("H1") == 0)
+				{
+					if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
+					{
+						base[0] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
+					{
+						base[0] = 1;
+						base[1] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
+					{
+						base[0] = 1;
+						base[1] = 1;
+						base[2] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
+					{
+						base[0] = 1;
+						base[1] = 1;
+						base[2] = 0;
+						R++;
+					}
+					else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
+					{
+						base[0] = 1;
+						base[1] = 0;
+						R++;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
+					{
+						base[0] = 1;
+						R++;
+					}
+					H++;
+				}
+				else if (result.compare("H2") == 0)
+				{
+					if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
+					{
+						base[1] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
+					{
+						base[0] = 0;
+						base[1] = 1;
+						base[2] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
+					{
+						base[0] = 0;
+						base[1] = 1;
+						base[2] = 1;
+						R++;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
+					{
+						base[0] = 0;
+						base[1] = 1;
+						base[2] = 1;
+						R++;
+					}
+					else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 0;
+						R += 2;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
+					{
+						base[0] = 0;
+						base[1] = 1;
+						base[2] = 1;
+						R += 2;
+					}
+					H++;
+				}
+				else if (result.compare("H3") == 0)
+				{
+					if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
+					{
+						base[2] = 1;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 1;
+						R++;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 1;
+						R += 2;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 1;
+						R += 2;
+					}
+					else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 1;
+						R += 2;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
+					{
+						base[0] = 0;
+						base[1] = 0;
+						base[2] = 1;
+						R += 3;
+					}
+					H++;
+				}
+				else if (result.compare("HR") == 0)
+				{
+					if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
+					{
+						base[0] = base[1] = base[2] = 0;
+						R++;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
+					{
+						base[0] = base[1] = base[2] = 0;
+						R += 2;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
+					{
+						base[0] = base[1] = base[2] = 0;
+						R += 3;
+					}
+					else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
+					{
+						base[0] = base[1] = base[2] = 0;
+						R += 3;
+					}
+					else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
+					{
+						base[0] = base[1] = base[2] = 0;
+						R += 3;
+					}
+					else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
+					{
+						base[0] = base[1] = base[2] = 0;
+						R += 4;
+					}
+					H++;
+				}
+			}
+			else if (strike == 3)
+			{
+				hitterResult.push_back("SO");
 				O++;
 			}
-			else if (result.compare("H1") == 0)
-			{
-				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
-				{
-					base[0] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
-				{
-					base[0] = 1;
-					base[1] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
-				{
-					base[0] = 1;
-					base[1] = 1;
-					base[2] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
-				{
-					base[0] = 1;
-					base[1] = 1;
-					base[2] = 0;
-					R++;
-				}
-				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
-				{
-					base[0] = 1;
-					base[1] = 0;
-					R++;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
-				{
-					base[0] = 1;
-					R++;
-				}
-				H++;
-			}
-			else if (result.compare("H2") == 0)
-			{
-				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
-				{
-					base[1] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
-				{
-					base[0] = 0;
-					base[1] = 1;
-					base[2] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
-				{
-					base[0] = 0;
-					base[1] = 1;
-					base[2] = 1;
-					R++;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
-				{
-					base[0] = 0;
-					base[1] = 1;
-					base[2] = 1;
-					R++;
-				}
-				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 0;
-					R += 2;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
-				{
-					base[0] = 0;
-					base[1] = 1;
-					base[2] = 1;
-					R += 2;
-				}
-				H++;
-			}
-			else if (result.compare("H3") == 0)
-			{
-				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
-				{
-					base[2] = 1;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 1;
-					R++;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 1;
-					R += 2;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 1;
-					R += 2;
-				}
-				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 1;
-					R += 2;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
-				{
-					base[0] = 0;
-					base[1] = 0;
-					base[2] = 1;
-					R += 3;
-				}
-				H++;
-			}
-			else if (result.compare("HR") == 0)
-			{
-				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 林磊 X
-				{
-					base[0] = base[1] = base[2] = 0;
-					R++;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1风
-				{
-					base[0] = base[1] = base[2] = 0;
-					R += 2;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2风
-				{
-					base[0] = base[1] = base[2] = 0;
-					R += 3;
-				}
-				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3风
-				{
-					base[0] = base[1] = base[2] = 0;
-					R += 3;
-				}
-				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3风
-				{
-					base[0] = base[1] = base[2] = 0;
-					R += 3;
-				}
-				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3风
-				{
-					base[0] = base[1] = base[2] = 0;
-					R += 4;
-				}
-				H++;
-			}
-		}
-		else if (strike == 3)
-		{
-			hitterResult.push_back("SO");
-			O++;
-		}
-		cout << "result : " << hitterResult[hitterResult.size() - 1] << endl;;
-		cnt++;
+			cout << "result : " << hitterResult[hitterResult.size() - 1] << endl;;
+			cnt++;
 
-		if (inning >= 9 && top == false)
-		{
-			if (a->R + R > b->R)
-				return idx;
+			if (inning >= 9 && top == false)
+			{
+				if (a->R + R > b->R)
+					return idx;
+			}
 		}
 	}
 	return idx;

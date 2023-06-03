@@ -42,10 +42,10 @@ int main()
 		cout << i + 1 << "회" << " 초" << endl;
 		idxA = innings[i][0].inputHitterData(&A, &B, idxA, i + 1);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
-		A.H += innings[i][0].H;
+		/*A.H += innings[i][0].H;
 		A.B += innings[i][0].B;
 		A.E += innings[i][0].E;
-		A.R += innings[i][0].R;
+		A.R += innings[i][0].R;*/
 
 		printBoard(innings, A.name, B.name, i + 1, true);
 		if (i >= 8)
@@ -64,10 +64,10 @@ int main()
 		cout << i + 1 << "회" << " 말" << endl;
 		idxB = innings[i][1].inputHitterData(&B, &A, idxB, i + 1, false);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
-		B.H += innings[i][1].H;
+		/*B.H += innings[i][1].H;
 		B.B += innings[i][1].B;
 		B.E += innings[i][1].E;
-		B.R += innings[i][1].R;
+		B.R += innings[i][1].R;*/
 
 		printBoard(innings, A.name, B.name, i + 1, false);
 		if (i >= 8)
@@ -89,7 +89,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 	int A_B = 0, B_B = 0;
 
 
-	cout << "-------------------------------------------------------------" << endl;
+	cout << "---------------------------------------------------------------------------" << endl;
 	cout << "l TEAM ";
 	for (int i = 0; i < 12; i++)
 	{
@@ -100,7 +100,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 	cout << "l E ";
 	cout << "l B ";
 
-	cout << endl << "-------------------------------------------------------------" << endl;
+	cout << endl << "---------------------------------------------------------------------------" << endl;
 	cout << "l " << a << " l";
 	for (int i = 0; i < 12; i++)
 	{
@@ -125,7 +125,7 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 	cout << "l " << A_E << " ";
 	cout << "l " << A_B << " ";
 
-	cout << endl << "-------------------------------------------------------------" << endl;
+	cout << endl << "---------------------------------------------------------------------------" << endl;
 	cout << "l " << b << " l";
 	int j = cnt;
 	if (top)
@@ -151,5 +151,5 @@ void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 	cout << "l " << B_E << " ";
 	cout << "l " << B_B << " ";
 
-	cout << endl << "-------------------------------------------------------------" << endl;
+	cout << endl << "---------------------------------------------------------------------------" << endl;
 }
