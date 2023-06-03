@@ -23,7 +23,7 @@ Inning::Inning()
 }
 
 
-int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
+int Inning::inputHitterData(Team* a, Team* b, int n, int inning, bool top)	// 인자로 포인터 사용
 {
 	int cnt = 0;
 	int idx = n;
@@ -371,6 +371,12 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 		}
 		cout << "result : " << hitterResult[hitterResult.size() - 1] << endl;;
 		cnt++;
+
+		if (inning >= 9 && top == false)
+		{
+			if (a->R + R > b->R)
+				return idx;
+		}
 	}
 	return idx;
 }

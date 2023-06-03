@@ -40,7 +40,7 @@ int main()
 	for (int i = 0; i < 12; i++)
 	{
 		cout << i + 1 << "회" << " 초" << endl;
-		idxA = innings[i][0].inputHitterData(&A, &B, idxA);
+		idxA = innings[i][0].inputHitterData(&A, &B, idxA, i + 1);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
 		A.H += innings[i][0].H;
 		A.B += innings[i][0].B;
@@ -53,12 +53,16 @@ int main()
 			if (B.R > A.R)
 			{
 				cout << "Game Over!";
-				return;
+				return 0;
 			}
 		}
 
+		if (i == 11)
+		{
+			cout << "check";
+		}
 		cout << i + 1 << "회" << " 말" << endl;
-		idxB = innings[i][1].inputHitterData(&B, &A, idxB);
+		idxB = innings[i][1].inputHitterData(&B, &A, idxB, i + 1, false);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
 		B.H += innings[i][1].H;
 		B.B += innings[i][1].B;
@@ -66,6 +70,14 @@ int main()
 		B.R += innings[i][1].R;
 
 		printBoard(innings, A.name, B.name, i + 1, false);
+		if (i >= 8)
+		{
+			if (B.R > A.R)
+			{
+				cout << "Game Over!";
+				return 0;
+			}
+		}
 	}
 }
 
