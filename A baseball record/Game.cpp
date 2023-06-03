@@ -40,13 +40,13 @@ int main()
 	for (int i = 0; i < 9; i++)
 	{
 		cout << i + 1 << "회" << " 초" << endl;
-		idxA = innings[i][0].inputHitterData(A, B, idxA);
+		idxA = innings[i][0].inputHitterData(&A, &B, idxA);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
 		
 		printBoard(innings, A.name, B.name, i + 1);
 
 		cout << i + 1 << "회" << " 말" << endl;
-		idxB = innings[i][1].inputHitterData(B, A, idxB);
+		idxB = innings[i][1].inputHitterData(&B, &A, idxB);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
 
 		printBoard(innings, A.name, B.name, i + 1);

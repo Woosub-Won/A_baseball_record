@@ -22,16 +22,8 @@ Inning::Inning()
 	vector<string> hitterResult;*/
 }
 
-<<<<<<< HEAD
-// A가 공격팀, B가 수비팀
-// A가 타자, B가 투수,수비
-int Inning::inputHitterData(Team a, Team b, int n)
-=======
 
-// A가 공격팀, B가 수비팀
-// A가 타자, B가 투수
 int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
->>>>>>> c7e6833 (Now can change pitcher too)
 {
 	int cnt = 0;
 	int idx = n;
@@ -40,11 +32,7 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 		if (idx > 8)
 			idx = 0;
 		int strike = 0, ball = 0;
-<<<<<<< HEAD
-		cout << "Hitter Name : " << a.startingPlayer[idx].getName() << endl;
-		hitter.push_back(a.startingPlayer[idx++].getName());
-=======
-		cout << "Hitter Name : " << a->startingPlayer[idx].getName() << endl;
+		cout << a->startingPlayer[idx].getName() << "[" << a->name << "]" << " vs " << "[" << b->name << "]" << b->startingPlayer[9].getName() << endl;
 
 		char option;
 		cout << "Do you want to change player? [Y/N] ";
@@ -112,9 +100,8 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 				cout << "Pitcher Name : " << b->startingPlayer[9].getName() << endl;
 			}
 		}
-		
+
 		hitter.push_back(a->startingPlayer[idx++].getName());
->>>>>>> c7e6833 (Now can change pitcher too)
 		ballCount.push_back(vector<char>());
 		while (strike < 3 && ball < 4)
 		{
@@ -126,7 +113,7 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 			{
 			case 'S': strike++; break;
 			case 'B': ball++;	break;
-			case 'F': 
+			case 'F':
 				if (strike < 2)
 					strike++;
 				break;
@@ -135,7 +122,7 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 				break;
 			}
 		}
-		
+
 		if (ball == 4)
 		{
 			hitterResult.push_back("BB");
