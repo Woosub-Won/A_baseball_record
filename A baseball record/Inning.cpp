@@ -165,9 +165,9 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 			cout << "What is the result? ";
 			string result;
 			cin >> result;
+			hitterResult.push_back(result);
 			if (result.compare("FB") == 0 || result.compare("GB") == 0)
 			{
-				hitterResult.push_back(result);
 				O++;
 			}
 			else if (result.compare("H1") == 0)
@@ -352,6 +352,7 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 			hitterResult.push_back("SO");
 			O++;
 		}
+		cout << "result : " << hitterResult[hitterResult.size() - 1] << endl;;
 		cnt++;
 	}
 	return idx;
