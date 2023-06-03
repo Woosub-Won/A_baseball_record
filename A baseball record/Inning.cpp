@@ -166,6 +166,43 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 			string result;
 			cin >> result;
 			hitterResult.push_back(result);
+			if (result.compare("E") == 0)
+			{
+				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 주자 X
+				{
+					base[0] = 1;
+				}
+				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1루
+				{
+					base[0] = 1;
+					base[1] = 1;
+				}
+				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2루
+				{
+					base[0] = 1;
+					base[1] = 1;
+					base[2] = 1;
+				}
+				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3루
+				{
+					base[0] = 1;
+					base[1] = 1;
+					base[2] = 0;
+					R++;
+				}
+				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3루
+				{
+					base[0] = 1;
+					base[1] = 0;
+					R++;
+				}
+				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3루
+				{
+					base[0] = 1;
+					R++;
+				}
+				E++;
+			}
 			if (result.compare("FB") == 0 || result.compare("GB") == 0)
 			{
 				O++;
@@ -175,20 +212,17 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 주자 X
 				{
 					base[0] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1루
 				{
 					base[0] = 1;
 					base[1] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2루
 				{
 					base[0] = 1;
 					base[1] = 1;
 					base[2] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3루
 				{
@@ -196,35 +230,31 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 1;
 					base[2] = 0;
 					R++;
-					H++;
 				}
 				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3루
 				{
 					base[0] = 1;
 					base[1] = 0;
 					R++;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3루
 				{
 					base[0] = 1;
 					R++;
-					H++;
 				}
+				H++;
 			}
 			else if (result.compare("H2") == 0)
 			{
 				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 주자 X
 				{
 					base[1] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1루
 				{
 					base[0] = 0;
 					base[1] = 1;
 					base[2] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2루
 				{
@@ -232,7 +262,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 1;
 					base[2] = 1;
 					R++;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3루
 				{
@@ -240,7 +269,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 1;
 					base[2] = 1;
 					R++;
-					H++;
 				}
 				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3루
 				{
@@ -248,23 +276,21 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 0;
 					R += 2;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3루
 				{
 					base[0] = 0;
 					base[1] = 1;
 					base[2] = 1;
-					R += 2;;
-					H++;
+					R += 2;
 				}
+				H++;
 			}
 			else if (result.compare("H3") == 0)
 			{
 				if (base[0] == 0 && base[1] == 0 && base[2] == 0)		// 주자 X
 				{
 					base[2] = 1;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1루
 				{
@@ -272,7 +298,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 1;
 					R++;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2루
 				{
@@ -280,7 +305,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 1;
 					R += 2;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3루
 				{
@@ -288,7 +312,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 1;
 					R += 2;
-					H++;
 				}
 				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3루
 				{
@@ -296,7 +319,6 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 1;
 					R += 2;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3루
 				{
@@ -304,8 +326,8 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 					base[1] = 0;
 					base[2] = 1;
 					R += 3;
-					H++;
 				}
+				H++;
 			}
 			else if (result.compare("HR") == 0)
 			{
@@ -313,38 +335,33 @@ int Inning::inputHitterData(Team* a, Team* b, int n)	// 인자로 포인터 사용
 				{
 					base[0] = base[1] = base[2] = 0;
 					R++;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 0)		// 1루
 				{
 					base[0] = base[1] = base[2] = 0;
 					R += 2;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 0)		// 1,2루
 				{
 					base[0] = base[1] = base[2] = 0;
 					R += 3;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 0 && base[2] == 1)		// 1,3루
 				{
 					base[0] = base[1] = base[2] = 0;
 					R += 3;
-					H++;
 				}
 				else if (base[0] == 0 && base[1] == 1 && base[2] == 1)		// 2,3루
 				{
 					base[0] = base[1] = base[2] = 0;
 					R += 3;
-					H++;
 				}
 				else if (base[0] == 1 && base[1] == 1 && base[2] == 1)		// 1,2,3루
 				{
 					base[0] = base[1] = base[2] = 0;
 					R += 4;
-					H++;
 				}
+				H++;
 			}
 		}
 		else if (strike == 3)
