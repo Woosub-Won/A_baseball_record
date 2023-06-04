@@ -6,12 +6,12 @@ using namespace std;
 class Player
 {
 public:
-	Player();
+	Player();	//생성자
 
 public:
-	int number;
-	string name;
-	int position;
+	int number;		// 등번호
+	string name;	// 선수 이름
+	int position;	// 선수 포지션
 	int status;	// 0 : 대기, 1 : 경기중, -1 : 교체 아웃
 
 public:

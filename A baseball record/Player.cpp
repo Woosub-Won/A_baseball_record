@@ -3,6 +3,8 @@
 
 using namespace std;
 
+// 해당 클래스는 모든 함수가 getter, setter 뿐이다.
+
 Player::Player()
 {
 	number = -1;

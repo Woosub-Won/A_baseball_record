@@ -8,17 +8,17 @@ using namespace std;
 class Inning
 {
 public:
-	int H;
-	int B;
-	int E;
-	int R;
-	int O;
-	int base[4];
+	int H;	// 안타
+	int B;	// 볼넷
+	int E;	// 에러
+	int R;	// 득점
+	int O;	// 아웃
+	int base[4];	// 현재 주자 상황
 
 public:
-	vector<vector<char>> ballCount;
-	vector<string> hitter;
-	vector<string> hitterResult;
+	vector<vector<char>> ballCount;	// strike, ball을 저장
+	vector<string> hitter;	// 타자의 이름을 저장
+	vector<string> hitterResult;	// 타격 결과를 저장
 
 public:
 	Inning();

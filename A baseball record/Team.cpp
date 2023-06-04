@@ -26,15 +26,18 @@ Team::Team(const string n)
 	isRegister = false;
 }
 
+// 선발 라인업 등록
 void Team::setStartingPlayer()
 {
 	char enter;
 	cout << "Do you want to register starting player? [Y/N] ";
 	cin >> enter;
-	if (enter == 'N')
+
+	// 현재 선발 라인업을 등록할건지 묻는 코드
+	while (enter == 'N')
 	{
-		isRegister = false;
-		return;
+		cout << "Do you want to register starting player? [Y/N] ";
+		cin >> enter;
 	}
 	isRegister = true;
 
@@ -77,6 +80,7 @@ void Team::setStartingPlayer()
 	cout << "------------------------------" << endl;
 }
 
+// 선발 라인업 출력
 void Team::printStartingPlayer()
 {
 	if (!isRegister)
@@ -95,6 +99,7 @@ void Team::printStartingPlayer()
 		<< "\tposition : " << startingPlayer[9].getPosition() << endl;
 }
 
+// 투수 등록
 void Team::setPitcher()
 {
 	cout << "How many pitcher do you have? ";
@@ -130,6 +135,7 @@ void Team::setPitcher()
 	}
 }
 
+// 타자 등록
 void Team::setHitter()
 {
 	cout << "How many hitter do you have? ";
@@ -168,6 +174,7 @@ void Team::setHitter()
 	}
 }
 
+// 투수 출력
 void Team::printPitcher()
 {
 	cout << "Pitcher" << endl;
@@ -177,6 +184,7 @@ void Team::printPitcher()
 	}
 }
 
+// 타자 출력
 void Team::printHitter()
 {
 	cout << "Hitter" << endl;
@@ -187,7 +195,7 @@ void Team::printHitter()
 	}
 }
 
-
+//모든 선수 출력
 void Team::printAllPlayer()
 {
 	cout << endl;
@@ -196,6 +204,7 @@ void Team::printAllPlayer()
 	printPitcher();
 }
 
+// 선수 교체
 void Team::swapPlayer(Player* A, Player* B)		// A¶û B¶û ½º¿Ò
 {
 	Player tmp;
@@ -215,6 +224,7 @@ void Team::swapPlayer(Player* A, Player* B)		// A¶û B¶û ½º¿Ò
 	B->setStatus(tmp.getStatus(true));
 }
 
+// 전광판 표시 내역 최신화
 void Team::reflectBoard(int h, int b, int e, int r)
 {
 	H += h;

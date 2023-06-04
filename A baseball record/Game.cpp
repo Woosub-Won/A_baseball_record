@@ -16,6 +16,7 @@ int main()
 	cout << "Team A : ";
 	cin >> A_team;
 
+	// 원정팀 setting
 	Team A(A_team);
 	A.setHitter();
 	A.setPitcher();
@@ -27,6 +28,7 @@ int main()
 	cout << "Team B : ";
 	cin >> B_team;
 
+	// 홈팀 setting
 	Team B(B_team);
 	B.setHitter();
 	B.setPitcher();
@@ -34,6 +36,7 @@ int main()
 	B.printStartingPlayer();
 	B.printAllPlayer();
 
+	// 최대 12회까지 진행
 	Inning innings[12][2];
 	int idxA = 0;
 	int idxB = 0;
@@ -42,10 +45,6 @@ int main()
 		cout << i + 1 << "회" << " 초" << endl;
 		idxA = innings[i][0].inputHitterData(&A, &B, idxA, i + 1);
 		A.reflectBoard(innings[i][0].H, innings[i][0].B, innings[i][0].E, innings[i][0].R);
-		/*A.H += innings[i][0].H;
-		A.B += innings[i][0].B;
-		A.E += innings[i][0].E;
-		A.R += innings[i][0].R;*/
 
 		printBoard(innings, A.name, B.name, i + 1, true);
 		if (i >= 8)
@@ -64,10 +63,6 @@ int main()
 		cout << i + 1 << "회" << " 말" << endl;
 		idxB = innings[i][1].inputHitterData(&B, &A, idxB, i + 1, false);
 		B.reflectBoard(innings[i][1].H, innings[i][1].B, innings[i][1].E, innings[i][1].R);
-		/*B.H += innings[i][1].H;
-		B.B += innings[i][1].B;
-		B.E += innings[i][1].E;
-		B.R += innings[i][1].R;*/
 
 		printBoard(innings, A.name, B.name, i + 1, false);
 		if (i >= 8)
@@ -81,6 +76,7 @@ int main()
 	}
 }
 
+// 전광판 출력
 void printBoard(Inning innings[][2], string a, string b, int cnt, bool top)
 {
 	int A_R = 0, B_R = 0;
